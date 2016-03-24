@@ -74,10 +74,10 @@ class RouteCreator {
 			if(this.controllerName){
 				rawRouter=rawRouter.replace(/@controllerDeclarationArea@/g, `let ${this.controllerName}Controller = localrequire('backend.controllers.${this.controllerName}');`);
 				rawRouter=rawRouter.replace(/@controllerInitializationArea@/g, `
-		//A must have function
-	    createController(){
-	        return new ${this.controllerName}Controller();
-	    }
+	//A must have function
+	createController(){
+	    return new ${this.controllerName}Controller();
+	}
 				`);
 			}
 			else{

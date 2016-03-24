@@ -4,6 +4,7 @@ let logger = require("../logger");
 let fs = require('fs');
 let readlineSync = require('readline-sync');
 let shell = require('shelljs');
+let ModelCreator = require('./model-creator');
 
 
 let controllerNameValidation = new RegExp(/^[a-z0-9]+$/i);
@@ -53,14 +54,35 @@ class ControllerCreator {
 		}
 
 		//collect model info
+		let requireModel = readlineSync.question("do you want a model for this controller? (yes/no) : ");
+		if(requireModel.toLowerCase()==="yes")
+			requireModel=true;
+		else
+			requireModel=false;
+
+		if(requireModel){
+			let modelInfoObj = (new ModelCreator()).bless();
+			this.modelName = modelInfoObj.name;
+		}
 	}
 
 	buildController(){
 		if(this.controllerName){
 			let rawController = fs.readFileSync(baseApplicationFolder+"/.voidcanvas/raw-controller.js", "UTF-8");
 			rawController=rawController.replace(/@controllerName@/g, this.controllerName);
-			rawController=rawController.replace(/@modelDeclarationArea@/g, "");
-			rawController=rawController.replace(/@modelInitializationArea@/g, "");
+			
+			if(this.modelName){
+				rawController=rawController.replace(/@modelDeclarationArea@/g, `let ${this.modelName}Model = localrequire('backend.models.${this.modelName}.model');`);
+				rawController=rawController.replace(/@modelInitializationArea@/g, `
+		this.model = new ${this.modelName}Model();
+				`);
+			}
+			else{
+				rawController=rawController.replace(/@modelDeclarationArea@/g, "");
+				rawController=rawController.replace(/@modelInitializationArea@/g, "");
+			}
+
+
 			let newControllerPath = baseApplicationFolder+"/backend/controllers/"+this.controllerName+".js";
 			fs.writeFileSync(newControllerPath, rawController);
 			return {
