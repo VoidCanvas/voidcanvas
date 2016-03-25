@@ -1,8 +1,8 @@
-# VoidCanvas cli
 
-A easy way to scaffold and develop your node application. 
+> Use latest node v4.1.2 or greater!
 
 > Void Canvas cli is still in experiment phrase. We will not recommend you to use it for your production apps till the time it doesn't hit version 1.0.0
+
 
 ## What is Void Canvas cli
 This is a npm package with which you can scaffold a node application easily. This will give you a predefined architecture to create rest apis very easily. You can also add your client side application there in the project.
