@@ -4,6 +4,7 @@ let logger = require('../logger');
 let packageJSON = require('../package.json');
 let shell = require('shelljs');
 let fs = require('fs');
+let compareVersions = require('compare-versions');
 
 let baseApplicationFolder = shell.pwd();
 
@@ -24,12 +25,7 @@ class Creator {
 	work(){
 		try{
 			let vcRawInfo = require(baseApplicationFolder+"/.voidcanvas/info.json");
-			let vcRawCliVersion = +vcRawInfo.cli.minVersion.replace(/\./g,"");
-			let currentCliVersion = +packageJSON.version.replace(/\./g,"");
-			logger.log("vcRawCliVersion "+vcRawCliVersion);
-			logger.log("currentCliVersion"+currentCliVersion);
-
-			if(vcRawCliVersion > currentCliVersion){
+			if(compareVersions(vcRawInfo.cli.minVersion, packageJSON.version)===1){
 				logger.error("The voidcanvas cli version is unable to process the request!");
 				logger.error("Kindly run the following conad to upgrade: ");
 				logger.different("npm update -g voidcanvas");

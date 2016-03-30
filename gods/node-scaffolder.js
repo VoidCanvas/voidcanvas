@@ -114,13 +114,26 @@ class NodeGod {
 			let inputValues = {};
 
 			//let's ask questions
-			inputValues.project = readlineSync.question(`project name (${defaultValues.project}) : `) || defaultValues.project;
-			inputValues.description = readlineSync.question(`project description (${defaultValues.description}) : `) || defaultValues.description;
-			inputValues.username = readlineSync.question(`author name (${defaultValues.username}) : `) || defaultValues.username;
-			inputValues.email = readlineSync.question(`author email (${defaultValues.email}) : `) || defaultValues.email;
-			inputValues.repo = readlineSync.question(`repo url (${defaultValues.repo}) : `) || defaultValues.repo;
-			inputValues.homepage = readlineSync.question(`homepage url (${defaultValues.homepage}) : `) || defaultValues.homepage;
-			inputValues.license = readlineSync.question(`license (${defaultValues.license}) : `) || defaultValues.license;
+			let defaultDisplayProject = defaultValues.project ? `(${defaultValues.project})` : "";
+			inputValues.project = readlineSync.question(`project name ${defaultDisplayProject} : `) || defaultValues.project;
+
+			let defaultDisplayDescription = defaultValues.description ? `(${defaultValues.description})` : "";
+			inputValues.description = readlineSync.question(`project description ${defaultDisplayDescription} : `) || defaultValues.description;
+
+			let defaultDisplayUserName = defaultValues.username ? `(${defaultValues.username})` : "";
+			inputValues.username = readlineSync.question(`author name ${defaultDisplayUserName} : `) || defaultValues.username;
+
+			let defaultDisplayEmail = defaultValues.email ? `(${defaultValues.email})` : "";
+			inputValues.email = readlineSync.question(`author email ${defaultDisplayEmail} : `) || defaultValues.email;
+
+			let defaultDisplayRepo = defaultValues.repo ? `(${defaultValues.repo})` : "";
+			inputValues.repo = readlineSync.question(`repo url ${defaultDisplayRepo} : `) || defaultValues.repo;
+
+			let defaultDisplayHomePage = defaultValues.homepage ? `(${defaultValues.homepage})` : "";
+			inputValues.homepage = readlineSync.question(`homepage url ${defaultDisplayHomePage} : `) || defaultValues.homepage;
+
+			let defaultDisplayLicense = defaultValues.license ? `(${defaultValues.license})` : "";
+			inputValues.license = readlineSync.question(`license ${defaultDisplayLicense} : `) || defaultValues.license;
 
 
 			//modifying package.json
