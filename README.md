@@ -31,8 +31,8 @@ This is a npm package with which you can scaffold a node application easily. Thi
 	$ vc run --prod --live //run live with prod config
 
 
-### config.json
-In the root folder you will get a `config.json` file where there are various configurations to take care of. 
+### configurations
+In the folder `configs`, you will find another directory `server`, where there are configuration for three different environments. In `configs` folder there's another file `localrequire-custom-paths` where you can set any shortcut path for any frequently used module of yours.
 
 ### Try some api
 A basic example of router, controller and model is given there. You can check the folder `backend` folder and to see it working, run the app and check route `/api/employee`
