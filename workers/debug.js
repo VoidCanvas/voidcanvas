@@ -4,25 +4,19 @@ let shell = require('shelljs');
 let argv = require('yargs').argv;
 let logger = require('../logger');
 
-class Runner {
+class Debugger {
 	work(){
 		let runType = process.argv[3] || "";
 		runType = runType.toLowerCase();
 		let path = shell.pwd();
 		let serverFile = require(`${path}/package.json`).main;
 
-		let isLive = argv.live;
 		let isProd = argv.prod;
 		let isQa = argv.qa;
 		let isDev = argv.dev;
 
 		//shell script to be fired:
-		let queryToBeExecuted = "";
-		
-		if(isLive)
-			queryToBeExecuted += `${__dirname}/../node_modules/nodemon/bin/nodemon.js ${serverFile} `;
-		else
-			queryToBeExecuted += `node ${serverFile} `;
+		let queryToBeExecuted = `${__dirname}/../node_modules/node-inspector/bin/node-debug.js ${serverFile} `;
 
 		if(isProd)
 			queryToBeExecuted += "--env=prod";
@@ -37,5 +31,5 @@ class Runner {
 	}
 }
 
-module.exports = new Runner();
+module.exports = new Debugger();
 

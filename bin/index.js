@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
 
-var loader = require('../workers/loader');
+var loader = require('../loader');
 loader.load();
 

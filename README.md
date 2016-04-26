@@ -25,7 +25,11 @@ This is a npm package with which you can scaffold a node application easily. Thi
 	
 
 ### Run the app
-	$ vc run
+	$ vc run //this will run the project (dev config)
+	$ vc run --live //run the project and auto restart if any modification done
+	$ vc run --qa //with qa config
+	$ vc run --prod --live //run live with prod config
+
 
 ### config.json
 In the root folder you will get a `config.json` file where there are various configurations to take care of. 

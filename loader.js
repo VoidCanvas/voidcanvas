@@ -1,10 +1,13 @@
 "use strict"
 
-let logger = require('../logger');
+let logger = require('./logger');
 
 let workerMap = {
 	"run":{
 		"module": "run"
+	},
+	"debug":{
+		"module": "debug"
 	},
 	"found": {
 		"module": "founder"
@@ -23,11 +26,14 @@ class Loader{
 		if(!primeWorker || !workerMap[primeWorker]){
 			logger.error("Wrong first argument");
 			logger.error("You can use any of the following: ");
-			logger.log("1. found");
-			logger.log("2. create");
+			for(var prop in workerMap){
+				if(workerMap.hasOwnProperty(prop)){
+					logger.log(prop);
+				}
+			}
 		}
 		else{
-			let workerModule = require("./"+workerMap[primeWorker].module);
+			let workerModule = require("./workers/"+workerMap[primeWorker].module);
 			workerModule.work();
 		}
 
