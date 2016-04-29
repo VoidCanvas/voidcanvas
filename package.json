@@ -28,6 +28,7 @@
     "compare-versions": "^2.0.1",
     "download": "^4.4.3",
     "fs": "0.0.2",
+    "ini": "^1.3.4",
     "node-inspector": "^0.12.8",
     "nodemon": "^1.9.1",
     "readline-sync": "^1.4.1",
