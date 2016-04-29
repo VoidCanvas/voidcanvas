@@ -9,25 +9,33 @@ class Debugger {
 		let runType = process.argv[3] || "";
 		runType = runType.toLowerCase();
 		let path = shell.pwd();
-		let serverFile = require(`${path}/package.json`).main;
+		let serverFile = null;
+		try{
+			serverFile = require(`${path}/package.json`).main;
+		}
+		catch(e){
+			logger.error("No project found");
+		}
+		
+		if(serverFile){
+			let isProd = argv.prod;
+			let isQa = argv.qa;
+			let isDev = argv.dev;
 
-		let isProd = argv.prod;
-		let isQa = argv.qa;
-		let isDev = argv.dev;
+			//shell script to be fired:
+			let queryToBeExecuted = `${__dirname}/../node_modules/node-inspector/bin/node-debug.js ${serverFile} `;
 
-		//shell script to be fired:
-		let queryToBeExecuted = `${__dirname}/../node_modules/node-inspector/bin/node-debug.js ${serverFile} `;
-
-		if(isProd)
-			queryToBeExecuted += "--env=prod";
-		else
-			if(isQa)
-				queryToBeExecuted += "--env=qa";
+			if(isProd)
+				queryToBeExecuted += "--env=prod";
 			else
-				queryToBeExecuted += "--env=dev";
+				if(isQa)
+					queryToBeExecuted += "--env=qa";
+				else
+					queryToBeExecuted += "--env=dev";
 
-		//run the script
-		shell.exec(queryToBeExecuted);
+			//run the script
+			shell.exec(queryToBeExecuted);
+		}		
 	}
 }
 

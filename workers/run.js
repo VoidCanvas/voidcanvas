@@ -9,31 +9,39 @@ class Runner {
 		let runType = process.argv[3] || "";
 		runType = runType.toLowerCase();
 		let path = shell.pwd();
-		let serverFile = require(`${path}/package.json`).main;
+		let serverFile = null;
+		try{
+			serverFile = require(`${path}/package.json`).main;
+		}
+		catch(e){
+			logger.error("No project found");
+		}
 
-		let isLive = argv.live;
-		let isProd = argv.prod;
-		let isQa = argv.qa;
-		let isDev = argv.dev;
+		if(serverFile){
+			let isLive = argv.live;
+			let isProd = argv.prod;
+			let isQa = argv.qa;
+			let isDev = argv.dev;
 
-		//shell script to be fired:
-		let queryToBeExecuted = "";
-		
-		if(isLive)
-			queryToBeExecuted += `${__dirname}/../node_modules/nodemon/bin/nodemon.js ${serverFile} `;
-		else
-			queryToBeExecuted += `node ${serverFile} `;
-
-		if(isProd)
-			queryToBeExecuted += "--env=prod";
-		else
-			if(isQa)
-				queryToBeExecuted += "--env=qa";
+			//shell script to be fired:
+			let queryToBeExecuted = "";
+			
+			if(isLive)
+				queryToBeExecuted += `${__dirname}/../node_modules/nodemon/bin/nodemon.js ${serverFile} `;
 			else
-				queryToBeExecuted += "--env=dev";
+				queryToBeExecuted += `node ${serverFile} `;
 
-		//run the script
-		shell.exec(queryToBeExecuted);
+			if(isProd)
+				queryToBeExecuted += "--env=prod";
+			else
+				if(isQa)
+					queryToBeExecuted += "--env=qa";
+				else
+					queryToBeExecuted += "--env=dev";
+
+			//run the script
+			shell.exec(queryToBeExecuted);
+		}
 	}
 }
 
