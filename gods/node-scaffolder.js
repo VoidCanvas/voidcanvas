@@ -167,7 +167,7 @@ class NodeGod {
 		let currentFolder = currentPath.split('/')[currentPath.split('/').length-1];
 		let gitConfig = {};
 		try{
-			if(fs.lstatSync(currentPath+"/.git").isDirectory()){
+			if(fs.existsSync(currentPath+"/.git") && fs.lstatSync(currentPath+"/.git").isDirectory()){
 				var config = ini.parse(fs.readFileSync(currentPath+'/.git/config', 'utf-8'));
 				gitConfig={
 					"username": config.user && config.user.name,
