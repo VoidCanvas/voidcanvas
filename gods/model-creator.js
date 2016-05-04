@@ -6,7 +6,7 @@ let readlineSync = require('readline-sync');
 let shell = require('shelljs');
 
 
-let modelNameValidation = new RegExp(/^[a-z0-9]+$/i);
+let modelNameValidation = new RegExp(/^[a-z0-9/]+$/i);
 let baseApplicationFolder = shell.pwd();
 
 class ModelCreator {
@@ -24,7 +24,7 @@ class ModelCreator {
 		//collect model name
 		while(!this.modelName){
 			let modelName = readlineSync.question("model name : ");
-			modelName = modelName.trim().replace(".js","");
+			modelName = modelName.trim().replace(".js","").replace(/\./g,"/");
 
 			if(modelName){
 				if(modelNameValidation.test(modelName)){
@@ -56,12 +56,14 @@ class ModelCreator {
 
 	buildModel(){
 		if(this.modelName){
+			let relativePath = ("backend/models/"+this.modelName).replace(/\//g,".");
 			let newModelPath = baseApplicationFolder+"/backend/models/"+this.modelName;
 			fs.mkdirSync(newModelPath);
 
 			//creating the model file
 			let rawModel = fs.readFileSync(baseApplicationFolder+"/.voidcanvas/raw-model/model.js", "UTF-8");
-			rawModel=rawModel.replace(/@modelName@/g, this.modelName);
+			let modelNameInModelFile = this.modelName.split("/")[this.modelName.split("/").length-1];
+			rawModel=rawModel.replace(/@modelName@/g, modelNameInModelFile);
 			fs.writeFileSync(newModelPath+"/model.js", rawModel);
 
 			//creating properties.json
@@ -75,7 +77,8 @@ class ModelCreator {
 
 			return {
 				name: this.modelName,
-				path: newModelPath
+				path: newModelPath,
+				relativePath: relativePath
 			}
 		}
 	}

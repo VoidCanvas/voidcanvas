@@ -62,7 +62,8 @@ class ControllerCreator {
 
 		if(requireModel){
 			let modelInfoObj = (new ModelCreator()).bless();
-			this.modelName = modelInfoObj.name;
+			this.modelName = modelInfoObj.name.replace(/\//,"");
+			this.modelPath = modelInfoObj.relativePath;
 		}
 	}
 
@@ -72,7 +73,7 @@ class ControllerCreator {
 			rawController=rawController.replace(/@controllerName@/g, this.controllerName);
 			
 			if(this.modelName){
-				rawController=rawController.replace(/@modelDeclarationArea@/g, `let ${this.modelName}Model = localrequire('backend.models.${this.modelName}.model');`);
+				rawController=rawController.replace(/@modelDeclarationArea@/g, `let ${this.modelName}Model = localrequire('${this.modelPath}.model');`);
 				rawController=rawController.replace(/@modelInitializationArea@/g, `
 		this.model = new ${this.modelName}Model();
 				`);
