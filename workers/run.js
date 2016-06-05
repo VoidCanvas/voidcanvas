@@ -26,8 +26,13 @@ class Runner {
 			//shell script to be fired:
 			let queryToBeExecuted = "";
 			
-			if(isLive)
-				queryToBeExecuted += `${__dirname}/../node_modules/nodemon/bin/nodemon.js ${serverFile} `;
+			if(isLive){
+				let networkFlag = "";
+				if (argv.network){
+					networkFlag = "-L"
+				}
+				queryToBeExecuted += `${__dirname}/../node_modules/nodemon/bin/nodemon.js ${networkFlag} ${serverFile} `;
+			}
 			else
 				queryToBeExecuted += `node ${serverFile} `;
 
