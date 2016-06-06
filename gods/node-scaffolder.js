@@ -4,9 +4,8 @@ let shell = require('shelljs');
 let readlineSync = require('readline-sync');
 let Download = require('download');
 let ini = require('ini');
-
 let logger = require('../logger');
-
+let nodeFoundationProjectVersion = require("../package.json").externalProjects["node-foundation"];
 let fs = require('fs');
 
 const allowedFiles = [
@@ -16,7 +15,7 @@ const allowedFiles = [
 	".."
 ]
 
-const node_foundation_path = "https://github.com/VoidCanvas/node-foundation/archive/master.zip";
+const node_foundation_path = `https://github.com/VoidCanvas/node-foundation/archive/${nodeFoundationProjectVersion}.zip`;
 
 function deleteFolderRecursive(path) {
   if( fs.existsSync(path) ) {

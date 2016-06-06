@@ -1,6 +1,6 @@
 {
   "name": "voidcanvas",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "An npm command line to scaffold and develop your node application and to do many other awesome things",
   "main": "bin/index.js",
   "scripts": {
@@ -34,5 +34,8 @@
     "readline-sync": "^1.4.1",
     "shelljs": "^0.6.0",
     "yargs": "^4.6.0"
+  },
+  "externalProjects": {
+    "node-foundation": "1.0.0"
   }
 }
