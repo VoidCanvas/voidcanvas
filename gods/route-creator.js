@@ -72,8 +72,10 @@ class RouteCreator {
 			rawRouter=rawRouter.replace(/@routeName@/g, this.routeName);
 			rawRouter=rawRouter.replace(/@routePath@/g, this.routeName);
 			if(this.controllerName){
-				rawRouter=rawRouter.replace(/@controllerDeclarationArea@/g, `let ${this.controllerName}Controller = localrequire('backend.controllers.${this.controllerName}');`);
+				rawRouter=rawRouter.replace(/@controllerDeclarationArea@/g, `
+let ${this.controllerName}Controller = localrequire('backend.controllers.${this.controllerName}');`);
 				rawRouter=rawRouter.replace(/@controllerInitializationArea@/g, `
+
 	//A must have function
 	createController(){
 	    return new ${this.controllerName}Controller();
@@ -84,13 +86,15 @@ class RouteCreator {
 				rawRouter=rawRouter.replace(/@controllerDeclarationArea@/g, "");
 				rawRouter=rawRouter.replace(/@controllerInitializationArea@/g, "");
 			}
-			console.log(rawRouter);
 			let newRoutePath = baseApplicationFolder+"/backend/routes/"+this.routeName+".js";
 			fs.writeFileSync(newRoutePath, rawRouter);
+			logger.success(`route ${this.routeName} is created successfully!`);
 			return {
 				name: this.routeName,
 				path: newRoutePath
 			}
+		} else {
+			logger.error(`route name is not provided!`);
 		}
 	}
 }

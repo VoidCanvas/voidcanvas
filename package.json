@@ -36,6 +36,6 @@
     "yargs": "^4.6.0"
   },
   "externalProjects": {
-    "node-foundation": "1.0.1"
+    "node-foundation": "1.0.4"
   }
 }

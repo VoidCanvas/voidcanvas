@@ -74,12 +74,14 @@ class ModelCreator {
 			let rawValidations = fs.readFileSync(baseApplicationFolder+"/.voidcanvas/raw-model/validations.json", "UTF-8");
 			fs.writeFileSync(newModelPath+"/validations.json", rawValidations);
 
-
+			logger.success(`model ${this.modelName} is created successfully!`);
 			return {
 				name: this.modelName,
 				path: newModelPath,
 				relativePath: relativePath
 			}
+		} else {
+			logger.error(`model name is not provided!`);
 		}
 	}
 }

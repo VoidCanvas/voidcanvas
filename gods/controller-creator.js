@@ -6,7 +6,6 @@ let readlineSync = require('readline-sync');
 let shell = require('shelljs');
 let ModelCreator = require('./model-creator');
 
-
 let controllerNameValidation = new RegExp(/^[a-z0-9]+$/i);
 let baseApplicationFolder = shell.pwd();
 
@@ -73,7 +72,8 @@ class ControllerCreator {
 			rawController=rawController.replace(/@controllerName@/g, this.controllerName);
 			
 			if(this.modelName){
-				rawController=rawController.replace(/@modelDeclarationArea@/g, `let ${this.modelName}Model = localrequire('${this.modelPath}.model');`);
+				rawController=rawController.replace(/@modelDeclarationArea@/g, `
+let ${this.modelName}Model = localrequire('${this.modelPath}.model');`);
 				rawController=rawController.replace(/@modelInitializationArea@/g, `
 		this.model = new ${this.modelName}Model();
 				`);
@@ -86,10 +86,13 @@ class ControllerCreator {
 
 			let newControllerPath = baseApplicationFolder+"/backend/controllers/"+this.controllerName+".js";
 			fs.writeFileSync(newControllerPath, rawController);
+			logger.success(`controller ${this.controllerName} is created successfully!`);
 			return {
 				name: this.controllerName,
 				path: newControllerPath
 			}
+		} else {
+			logger.error(`controller name is not provided!`);
 		}
 	}
 }

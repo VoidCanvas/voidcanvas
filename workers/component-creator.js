@@ -41,7 +41,7 @@ class Creator {
 
 		let componentType = process.argv[3];
 		if(!componentType || !componentMap[componentType]){
-			logger.error("You haven't specify the last argument which denotes which type of app you wanna scaffold");
+			logger.error("You haven't provided a valid third argument which denotes what type of component you want to create.");
 			logger.error("You can use any of the following: ");
 			logger.log("1. route ");
 			logger.log("2. controller ");

@@ -150,6 +150,7 @@ class NodeGod {
 			fs.writeFileSync(packageJsonPath, JSON.stringify(pckgJSON, null, 4));
 
 			shell.exec("npm install");
+			logger.success("Project setup is done! \nYou can do modifications in the config files present inside ./configs folder and run the project with the command 'vc run'. \nFor more info/tutorial please visit http://voidcanvas.com/cli ");
 		}
 	}
 
@@ -175,7 +176,10 @@ class NodeGod {
 				}
 			}
 		}
-		catch(e){console.log(e)}
+		catch(e){
+			logger.error("Following error occured!")
+			logger.error(e);
+		}
 
 		gitConfig.project = currentFolder;
 		gitConfig.username = gitConfig.username || "";
