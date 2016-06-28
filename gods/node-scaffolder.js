@@ -97,6 +97,7 @@ class NodeGod {
 
 	//actual scaffolding
 	scaffold(path){
+		logger.log("It's downloading the base repo; wait for a minute...");
 		new Download({mode: '755', extract:true, strip: 1})
 	    .get(node_foundation_path)
 	    .dest(path)
@@ -107,7 +108,7 @@ class NodeGod {
 		if(err)
 			logger.error("Something went wrong. Couldn't download node-foundation repo from github.com/voidcanvas");
 		else{
-			logger.log("repo downloading done!!");
+			logger.success("Repo downloading done!!");
 			let pckgJSON = this.getPackageJSON();
 			let defaultValues = this.getDefaults();
 			let inputValues = {};
@@ -148,7 +149,7 @@ class NodeGod {
 			let packageJsonPath = currentPath+"/package.json";
 
 			fs.writeFileSync(packageJsonPath, JSON.stringify(pckgJSON, null, 4));
-
+			logger.log("It's scaffolding; wait for a moment...");
 			shell.exec("npm install");
 			logger.success("Project setup is done! \nYou can do modifications in the config files present inside ./configs folder and run the project with the command 'vc run'. \nFor more info/tutorial please visit http://voidcanvas.com/cli ");
 		}
