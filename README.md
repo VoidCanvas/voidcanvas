@@ -269,6 +269,13 @@ You can find `this.request` in your controller object. Inside this request objec
 
 ## Routes
 
+	vc create route
+	//answer questions
+	//remember it will also ask if you
+	//want a controller to associate with it.
+	//if you say yes, it will create a new controller and 
+	//that will be accessible as this.controller from the router
+
 Routes are pushed to `backend/routes` folder. The base path of the routes are given inside the config file, which is there in `configs/server/` folder for different environments. Each route has it's own individual route path (which must be unique) given in the file and by default includes five routes who are:
 
 * [GET] routePath/
