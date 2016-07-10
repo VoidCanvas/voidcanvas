@@ -50,7 +50,8 @@ class Creator {
 			logger.error("You haven't provided a valid third argument which denotes what type of component you want to create.");
 			logger.error("You can use any of the following: ");
 			Object.keys(componentMap).forEach(prop=>{
-				logger.log(prop);
+				if (prop!=="store" && prop!=="component")
+					logger.log(prop);
 			});
 		}
 		else{
