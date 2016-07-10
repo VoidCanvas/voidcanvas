@@ -17,6 +17,12 @@ let componentMap = {
 	},
 	"model":{
 		"module": "model-creator"
+	},
+	"store":{
+		"module": "react-store-creator"
+	},
+	"component":{
+		"module": "react-component-creator"
 	}
 }
 
@@ -43,9 +49,9 @@ class Creator {
 		if(!componentType || !componentMap[componentType]){
 			logger.error("You haven't provided a valid third argument which denotes what type of component you want to create.");
 			logger.error("You can use any of the following: ");
-			logger.log("1. route ");
-			logger.log("2. controller ");
-			logger.log("3. model ");
+			Object.keys(componentMap).forEach(prop=>{
+				logger.log(prop);
+			});
 		}
 		else{
 			let god = new (require("../gods/"+componentMap[componentType].module))();

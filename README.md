@@ -336,3 +336,11 @@ Below are few useful commands:
 
 Again, if you find any difficulty understanding or implementing the routes you can raise an issue in github.
 
+## Experimental development
+VoidCanvas cli can also be used to develop react application with flux architecture and webpack.
+You can use it, but more development on this feature are pending from our side.
+
+	vc found react //to scaffold it
+	vc create component //to create a component
+	vc create store //to create a store
+	npm start //to run the app

@@ -26,11 +26,9 @@ class Loader{
 		if(!primeWorker || !workerMap[primeWorker]){
 			logger.error("Wrong first argument");
 			logger.error("You can use any of the following: ");
-			for(var prop in workerMap){
-				if(workerMap.hasOwnProperty(prop)){
-					logger.log(prop);
-				}
-			}
+			Object.keys(workerMap).forEach(prop=>{
+				logger.log(prop);
+			});
 		}
 		else{
 			let workerModule = require("./workers/"+workerMap[primeWorker].module);
