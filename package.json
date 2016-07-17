@@ -36,7 +36,7 @@
     "yargs": "^4.6.0"
   },
   "externalProjects": {
-    "node-foundation": "1.0.8",
+    "node-foundation": "1.0.9",
     "react-foundation": "0.1.3"
   }
 }
