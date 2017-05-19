@@ -2,8 +2,6 @@
 
 let shell = require('shelljs');
 let BaseScaffolder = require('../base/scaffolder');
-let reactFoundationProjectVersion = require("../package.json").externalProjects["react-foundation"];
-const react_foundation_path = `https://github.com/VoidCanvas/react-foundation/archive/${reactFoundationProjectVersion}.zip`;
 
 class ReactGod extends BaseScaffolder{
 	bless(){
@@ -12,10 +10,12 @@ class ReactGod extends BaseScaffolder{
 			this.scaffold(path);
 		}
 	}
-
+	get reactFoundationArchitecturePath(){
+		return `${__dirname}/../architectures/react-foundation/.`;
+	}
 	//actual scaffolding
 	scaffold(path){
-		this.downloadAndScaffold(react_foundation_path, path);
+		shell.cp("-R", this.reactFoundationArchitecturePath, path);
 	}
 }
 
