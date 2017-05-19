@@ -3,12 +3,6 @@
 let logger = require('./logger');
 
 let workerMap = {
-	"run":{
-		"module": "run"
-	},
-	"debug":{
-		"module": "debug"
-	},
 	"found": {
 		"module": "founder"
 	},
