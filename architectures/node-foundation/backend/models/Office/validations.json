@@ -1,0 +1,22 @@
+{
+	"api":{
+		"name":{
+			"rules":["required"],
+			"controlName":"name"
+		},
+		"foundingYear":  {
+			"rules":["required"],
+			"controlName":"foundingYear"
+		}
+	},
+	"ui":{
+		"companyName":{
+			"rules":["required"],
+			"controlName":"companyName"
+		},
+		"estd":  {
+			"rules":["required", "number", "estdValidator"],
+			"controlName":"estd"
+		}
+	}
+}

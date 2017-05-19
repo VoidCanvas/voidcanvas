@@ -1,0 +1,23 @@
+{
+	"api":{
+		"name":{
+			"rules":["required"],
+			"controlName":"Name"
+		},
+		"worksFor":{
+			"rules":["required"],
+			"controlName":"worksFor"
+		}
+	},
+	"ui":{
+		"fullName":{
+			"rules":["required"],
+			"controlName":"fullName"
+		},
+		"companyDetails":{
+			"rules":["required"],
+			"controlName":"companyDetails"
+		}
+	}
+
+}

@@ -1,0 +1,20 @@
+{
+	"server": {
+		"port": 1729,
+		"baseApiPath": "/api",
+		"headers":{
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+		},
+		"response":{
+			"isCompress": true
+		}
+	},
+	"client":{
+		"baseFolder": "./frontend"
+	},
+	"database":{
+		"client": "database.mongo-client",
+		"source": "mongodb://username:password@mydb.dbserver.com:12345/db-name"
+	}
+}

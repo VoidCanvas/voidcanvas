@@ -1,0 +1,32 @@
+{
+	"properties":{
+		"_id":{
+			"type": "String"
+		},
+		"name":  {
+			"type": "String",
+			"value": "UnNamed"
+		},
+		"worksFor": {
+			"type": "Office"
+		},
+		"previousEmployers":{
+			"type": "Office",
+			"isArray": true
+		}
+	},
+
+	"uiMap":{
+		"_id": "_id",
+		"fullName": "name",
+		"companyDetails": "worksFor",
+		"previousEmployers": "previousEmployers"
+	},
+
+	"dbMap":{
+		"_id": "_id",
+		"name": "name",
+		"company": "worksFor",
+		"previousEmployers":"previousEmployers"
+	}
+}

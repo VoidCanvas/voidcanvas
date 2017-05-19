@@ -1,0 +1,25 @@
+{
+	"properties":{
+		"name":{
+			"type": "String"
+		},
+		"address":{
+			"type": "String"
+		},
+		"foundingYear":  {
+			"type": "Number"
+		}
+	},
+
+	"uiMap":{
+		"companyName": "name",
+		"companyAddress": "address",
+		"estd": "foundingYear"
+	},
+
+	"dbMap":{
+		"name": "name",
+		"fullAddress": "address",
+		"foundingYear": "foundingYear"
+	}
+}

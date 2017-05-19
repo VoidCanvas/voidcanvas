@@ -2,8 +2,6 @@
 
 let shell = require('shelljs');
 let BaseScaffolder = require('../base/scaffolder');
-let nodeFoundationProjectVersion = require("../package.json").externalProjects["node-foundation"];
-const node_foundation_path = `https://github.com/VoidCanvas/node-foundation/archive/${nodeFoundationProjectVersion}.zip`;
 
 class NodeGod extends BaseScaffolder{
 	bless(){
@@ -12,10 +10,12 @@ class NodeGod extends BaseScaffolder{
 			this.scaffold(path);
 		}
 	}
-
+	get nodeFoundationArchitecturePath(){
+		return `${__dirname}/../architectures/node-foundation/.`;
+	}
 	//actual scaffolding
 	scaffold(path){
-		this.downloadAndScaffold(node_foundation_path, path);
+		shell.cp("-R", this.nodeFoundationArchitecturePath, path);
 	}
 }
 
